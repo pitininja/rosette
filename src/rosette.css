@@ -1,0 +1,40 @@
+
+.rosette-wrap {
+	display:inline-block;
+	position:relative;
+}
+
+.rosette-input-container {
+	position:relative;
+}
+
+.rosette-dropdown {
+	display:none;
+	position:absolute;
+	width:100%;
+}
+
+.rosette-dropdown .rosette-input {
+	width:100%;
+}
+
+.rosette-button {
+	background:#336AB2;
+	border-radius:2px;
+	color:white;
+	display:inline-block;
+	height:60%;
+	line-height:100%;
+	padding:2px;
+	position:absolute;
+	right:1%;
+	text-align:center;
+	top:50%;
+	transform:translateY(-50%);
+	user-select:none;
+	width:auto;
+}
+
+.rosette-main .rosette-button {
+	cursor:pointer;
+}
