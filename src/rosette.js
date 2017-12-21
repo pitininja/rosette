@@ -124,12 +124,15 @@
 
 		//close dropdown
 		closeDropdown: function($input) {
-			var $dropdown = $('.rosette-dropdown');
+			var $target = $('.rosette-input.rosette-main');
 			if(typeof $input !== 'undefined') {
-				$dropdown = $input.data('rosette-dropdown');
+				$target = $input;
 			}
-			//open dropdown
-			$dropdown.stop().removeClass('open').slideUp(100);
+			//open target dropdowns
+			$target.each(function() {
+				var $dropdown = $(this).data('rosette-dropdown');
+				$dropdown.stop().removeClass('open').slideUp(100);
+			});
 		}, 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ destroy
