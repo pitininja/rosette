@@ -254,8 +254,6 @@
 			var $wrap = $input.data('rosette-wrap');
 			//sample button
 			var $sampleButton = $('<div class="rosette-button"></div>');
-			//set font size
-			$sampleButton.css('font-size', $input.css('font-size'));
 			//loop through inputs
 			$wrap.find('.rosette-input').each(function() {
 				var $thisInput = $(this);
@@ -294,11 +292,15 @@
 		button: function() {
 			var $input = $(this).closest('.rosette-input-container').find('.rosette-input');
 			var $dropdown = $input.data('rosette-dropdown');
-			//toggle dropdown
+			//close dropdown if was open
 			if($dropdown.is('.open')) {
 				Engine.closeDropdown($input);
 			}
+			//open dropdown if was closed
 			else {
+				//close any other dropdown
+				Engine.closeDropdown($('.rosette-input.rosette-main').not($input));
+				//open dropdown
 				Engine.openDropdown($input);
 			}
 		}, 
