@@ -23,6 +23,15 @@ $('target-selector').rosette({
 });
 ```
 
+Use Rosette methods:
+```javascript
+$('target-selector').rosette('method');
+//with data
+$('target-selector').rosette('method', {
+    //data
+});
+```
+
 ## Settings
 
 Rosette can be initialized with a bunch of available settings.
@@ -39,7 +48,7 @@ $('target-selector').rosette({
 });
 ```
 
-### Available settings
+### Settings
 
 #### languages
 
@@ -62,6 +71,39 @@ Example:
 Default: `null`
 
 The main language ID that will be displayed on the main input. The other languages will be displayed on the dropdown inputs.
+
+### Methods
+
+#### get
+
+*This method can be called on a single element only!*
+
+Get the translation values of a Rosette input.
+
+Example:
+
+```
+var values = $('target-input').rosette('get');
+values: {
+	1: 'A translation', 
+	2: 'Une traduction', 
+	3: 'Eine ubersetzung'
+}
+```
+
+#### set
+
+Set the values on Rosette input.
+
+Example:
+
+```
+$('target-input').rosette('set', {
+	1: 'A translation', 
+	2: 'Une traduction', 
+	3: 'Eine ubersetzung'
+});
+```
 
 ## Questions
 
