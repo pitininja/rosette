@@ -132,6 +132,19 @@
 			$dropdown.stop().removeClass('open').slideUp(100);
 		}, 
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ destroy
+
+		//destroy rosette
+		destroy: function($input) {
+			var $wrap = $input.data('rosette-wrap');
+			//replace rosette elements with original input
+			$wrap.replaceWith($input);
+			//remove classes
+			$input.removeClass('rosette-input rosette-main');
+			//remove data
+			$input.removeData('rosette-wrap').removeData('rosette-dropdown');
+		}, 
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ getValues
 
 		//get translation values
@@ -150,17 +163,38 @@
 			return data;
 		}, 
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ destroy
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ setValues
 
-		//destroy rosette
-		destroy: function($input) {
+		//set translation values
+		setValues: function($input, values) {
 			var $wrap = $input.data('rosette-wrap');
-			//replace rosette elements with original input
-			$wrap.replaceWith($input);
-			//remove classes
-			$input.removeClass('rosette-input rosette-main');
-			//remove data
-			$input.removeData('rosette-wrap').removeData('rosette-dropdown');
+			//get the language ids of the current rosette
+			var inputLangIds = [];
+			$wrap.find('.rosette-input').each(function() {
+				inputLangIds.push(parseInt($(this).attr('data-rosette-language')));
+			});
+			//control provided languages ids
+			var valuesOk = true;
+			var valuesLangIds = Object.keys(values);
+			valuesLangIds.forEach(function(val) {
+				if($.inArray(parseInt(val), inputLangIds) === -1) {
+					valuesOk = false;
+				}
+			});
+			//if valid values
+			if(valuesOk === true) {
+				//loop through inputs
+				$wrap.find('.rosette-input').each(function() {
+					var $thisInput = $(this);
+					//set input value
+					var thisLangKey = parseInt($thisInput.attr('data-rosette-language'));
+					$thisInput.val(values[thisLangKey]);
+				});
+			}
+			//invalid values
+			else {
+				console.error('Rosette ERROR: Invalid values');
+			}
 		}
 
 	};
@@ -281,21 +315,6 @@
 	};
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
-// ---------------------------------------- TOOLS ----------------------------------------- //
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
-
-	var Tools = {
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
-
-		//
-		someMethod: function() {
-			//
-		}
-
-	};
-
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
 // --------------------------------------- METHODS --------------------------------------- //
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
 
@@ -333,6 +352,22 @@
 			var $target = this.first();
 			//return values
 			return Engine.getValues($target);
+		}, 
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ set
+
+		//set
+		set: function(values) {
+			//controls provided values
+			if(typeof values !== 'object' || values === null) {
+				console.error('Rosette ERROR: No values provided');
+				return;
+			}
+			//loop through targeted elements
+			return this.each(function() {
+				//set values
+				Engine.setValues($(this), values);
+			});
 		}
 
 	};
