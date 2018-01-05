@@ -1,3 +1,8 @@
+.rosette-wrap, 
+.rosette-wrap * {
+	box-sizing:border-box;
+}
+
 .rosette-wrap {
 	display:inline-block;
 	position:relative;
@@ -7,13 +12,14 @@
 	position:relative;
 }
 
+.rosette-input {
+	padding-right:12% !important;
+	width:100% !important;
+}
+
 .rosette-dropdown {
 	display:none;
 	position:absolute;
-	width:100%;
-}
-
-.rosette-dropdown .rosette-input {
 	width:100%;
 }
 
@@ -22,9 +28,8 @@
 	border-radius:2px;
 	color:white;
 	display:inline-block;
-	font-size:0.8em;
-	height:60%;
-	line-height:100%;
+	height:80%;
+	overflow:hidden;
 	padding:2px;
 	position:absolute;
 	right:1%;
@@ -32,7 +37,15 @@
 	top:50%;
 	transform:translateY(-50%);
 	user-select:none;
-	width:auto;
+	width:10%;
+}
+
+.rosette-button-text {
+	font-size:0.8em;
+	position:relative;
+	text-align:center;
+    top:50%;
+    transform:translateY(-50%);
 }
 
 .rosette-main .rosette-button {

@@ -256,7 +256,7 @@
 		buildButtons: function($input, settings) {
 			var $wrap = $input.data('rosette-wrap');
 			//sample button
-			var $sampleButton = $('<div class="rosette-button"></div>');
+			var $sampleButton = $('<div class="rosette-button"><div class="rosette-button-text"></div></div>');
 			//loop through inputs
 			$wrap.find('.rosette-input').each(function() {
 				var $thisInput = $(this);
@@ -264,7 +264,7 @@
 				var $cloneButton = $sampleButton.clone();
 				//insert language text in button
 				var thisLangKey = $thisInput.attr('data-rosette-language');
-				$cloneButton.text(settings.languages[thisLangKey]);
+				$cloneButton.find('.rosette-button-text').text(settings.languages[thisLangKey]);
 				//insert button in input
 				$thisInput.closest('.rosette-input-container').append($cloneButton);
 			});
